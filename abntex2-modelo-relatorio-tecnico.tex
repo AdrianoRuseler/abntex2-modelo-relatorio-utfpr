@@ -1,0 +1,473 @@
+%% abtex2-modelo-relatorio-tecnico.tex, v-1.9.5 laurocesar
+%% Copyright 2012-2015 by abnTeX2 group at http://www.abntex.net.br/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on 
+%% http://www.abntex.net.br/
+%%
+%% This work consists of the files abntex2-modelo-relatorio-tecnico.tex,
+%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
+%%
+
+
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2: Modelo de Relatório Técnico/Acadêmico em conformidade com 
+% ABNT NBR 10719:2011 Informação e documentação - Relatório técnico e/ou
+% científico - Apresentação
+% ------------------------------------------------------------------------ 
+% ------------------------------------------------------------------------
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+	twoside,			% para impressão em verso e anverso. Oposto a oneside
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	sumario=tradicional,
+%	sumario=abnt-6027-2012, %  soh pode ser usado com memoir v3.6k ou superior
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	]{abntex2-relatorio-utfpr}
+
+
+% ---
+% PACOTES
+% ---
+%\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+%\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+% ---
+% Pacotes de citações 
+% ---
+
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citação alfabética por autor-data [alf]
+%\usepackage[num]{abntex2cite} % Citação numérica [num]
+%\citebrackets[]
+
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+\renewcommand{\lstlistingname}{Código--fonte }% Listing -> Codigo fonte
+\renewcommand{\lstlistlistingname}{Lista de códigos--fonte}% List of Listings -> Lista de códigos-fonte
+\newlistof{lstlistoflistings}{lol}{\lstlistlistingname}
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Modelo Canônico de Relatórios técnicos com \abnTeX}
+\autor{Nome do Autor 01 \\Nome do Autor 02 \\Nome do Autor 03\\}
+\local{Curitiba, Paraná -- Brasil}
+%\local{Florianópolis}
+\data{\today}
+\instituicao{%
+	Universidade Tecnológica Federal do Paraná -- UTFPR
+	\par
+	Departamento Acadêmico de Eletrotécnica - DAELT}
+\tipotrabalho{Relatório técnico}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{Relatório apresentado na disciplina de Eletrônica de
+	Potência do curso de Engenharia Industrial Elétrica,
+	Eletrotécnica.}
+% ---
+
+
+\universidade{Universidade Tecnológica Federal do Paraná}
+\departamento{Departamento Acadêmico de Eletrotécnica}
+\disciplina{Disciplina de Eletrônica de Potência}
+\professor{Prof. Adriano Ruseler Dr. Eng.}
+\laboratorio{Laboratório de Eletrônica de Potência} 
+
+
+
+% ---
+% Configurações de aparência do PDF final
+
+%
+%\definecolor{figcolor}{rgb}{1,0.4,0}  % orange
+%\definecolor{tabcolor}{rgb}{1,0.4,0}  % orange
+%\definecolor{eqncolor}{rgb}{1,0.4,0}  % orange
+%\definecolor{linkcolor}{rgb}{1,0.4,0}  % orange
+%\definecolor{citecolor}{rgb}{1,0.4,0}  % orange
+%\definecolor{seccolor}{rgb}{0,0,1}  % blue
+%\definecolor{abscolor}{rgb}{0,0,1}  % blue
+%\definecolor{titlecolor}{rgb}{0,0,1}  % blue
+%\definecolor{biocolor}{rgb}{0,0,1}  % blue
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+	%pagebackref=true,
+	pdftitle={\@title}, 
+	pdfauthor={Autores},
+	pdfsubject={Relatório Técnico},
+	pdfcreator={LaTeX with abnTeX2},
+	pdfkeywords={abnt}{latex}{UFSC}{abntex2}{tese}{INEP}, 
+	colorlinks=true,       		% false: boxed links; true: colored links
+	linkcolor=linkcolor,          	% color of internal links
+	citecolor=citecolor,        		% color of links to bibliography
+	filecolor=black,      		% color of file links
+	urlcolor=linkcolor,
+	bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+
+
+% ---
+% Estilo de capítulos
+%
+%\chapterstyle{default}
+% \chapterstyle{pedersen} 
+%\chapterstyle{lyhne} 
+%\chapterstyle{madsen} 
+% \chapterstyle{veelo} 
+%\chapterstyle{companion}
+
+%\chapterstyle{thatcher}
+%\chapterstyle{verville}
+
+\chapterstyle{VZ14} % Ver classe para maiores detalhes
+
+
+%
+% Veja outros estilos em:
+% http://www.tex.ac.uk/tex-archive/info/MemoirChapStyles/MemoirChapStyles.pdf
+% ---
+
+% http://tex.stackexchange.com/questions/228936/setting-entries-of-list-of-listings-in-latex-package-listings
+\newlength\mylen
+
+\begingroup
+\makeatletter
+\let\newcounter\@gobble\let\setcounter\@gobbletwo
+\globaldefs\@ne \let\c@loldepth\@ne
+\newlistof{listings}{lol}{\lstlistlistingname}
+\newlistentry{lstlisting}{lol}{0}
+\makeatother
+\endgroup
+
+\renewcommand\cftlstlistingpresnum{\lstlistingname~}
+\settowidth\mylen{\cftlstlistingpresnum\cftlstlistingaftersnum}
+\addtolength\cftlstlistingnumwidth{\mylen} %
+\renewcommand\cftlstlistingaftersnum{\hfill\textendash\hfill}
+
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+\setlength\beforechapskip{10pt}
+\setlength\midchapskip{15pt}
+\setlength\afterchapskip{15pt}
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+
+%\includeonly{PreTexto/fichacatalografica}
+%\includeonly{PreTexto/agradecimentos}
+%\includeonly{PreTexto/resumos}
+%\includeonly{PreTexto/siglas}
+%\includeonly{PreTexto/simbolos}
+%
+%\includeonly{Capitulos/00/CH00}
+%\includeonly{Capitulos/01/CH01}
+%\includeonly{Capitulos/02/CH02}
+%\includeonly{Capitulos/03/CH03}
+%\includeonly{Capitulos/04/CH04}
+
+
+
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+% Seleciona o idioma do documento (conforme pacotes do babel)
+%\selectlanguage{english}
+\selectlanguage{brazil}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+\imprimircapaUFSC  % Aplica o modelo com logo da UFSC
+%\imprimircapa % Aplica o modelo default do pacote abntex2
+% ---
+
+
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+ \imprimirfolhaderosto
+% ---
+
+
+% ---
+% Agradecimentos
+% ---
+%\input{PreTexto/agradecimentos.tex}
+% ---
+
+% ---
+% RESUMO
+% ---
+
+% resumo na língua vernácula (obrigatório)
+\setlength{\absparsep}{18pt} % ajusta o espaçamento dos parágrafos do resumo
+
+\input{PreTexto/resumos}
+
+% ---
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+
+% ---
+% inserir códigos fonte
+% ---
+\pdfbookmark[0]{\lstlistingname}{lol}
+\lstlistoflistings*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+\input{PreTexto/siglas}
+% ---
+
+% ---
+% inserir lista de símbolos
+% ---
+\input{PreTexto/simbolos}
+% ---
+
+
+
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+
+\textual
+
+\setlength\beforechapskip{50pt}
+\setlength\midchapskip{20pt}
+\setlength\afterchapskip{20pt}
+
+%\textualINEPUFSC
+
+% ----------------------------------------------------------
+% Introdução (exemplo de capítulo sem numeração, mas presente no Sumário)
+% ----------------------------------------------------------
+
+% ----------------------------------------------------------
+% Introdução (exemplo de capítulo sem numeração, mas presente no Sumário)
+% ----------------------------------------------------------
+\include{Capitulos/00/CH00}
+
+
+
+% ----------------------------------------------------------
+% PARTE - preparação da pesquisa
+% ----------------------------------------------------------
+\part{Preparação do relatório}
+
+% ----------------------------------------------------------
+% Capitulo com exemplos de comandos inseridos de arquivo externo 
+% ----------------------------------------------------------
+
+\include{Capitulos/01/CH01}
+%\include{abntex2-modelo-include-comandos}
+
+
+
+% ----------------------------------------------------------
+% Parte de revisão e literatura
+% ----------------------------------------------------------
+\part{Resultados}
+
+% ---
+% Capitulo de revisão de literatura
+% ---
+\include{Capitulos/02/CH02}
+% ---
+
+% ---
+% Finaliza a parte no bookmark do PDF
+% para que se inicie o bookmark na raiz
+% e adiciona espaço de parte no Sumário
+% ---
+\phantompart
+
+% ---
+% Conclusão
+% ---
+
+\include{Capitulos/Concl/Concl}
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+
+\setlength\beforechapskip{0pt}
+\setlength\midchapskip{15pt}
+\setlength\afterchapskip{15pt}
+
+\bibliography{abntex2-modelo-references}
+
+% ----------------------------------------------------------
+% Glossário
+% ----------------------------------------------------------
+%
+% Consulte o manual da classe abntex2 para orientações sobre o glossário.
+%
+%\glossary
+
+% ----------------------------------------------------------
+% Apêndices
+% ----------------------------------------------------------
+
+% ---
+% Inicia os apêndices
+% ---
+\begin{apendicesenv}
+
+% Imprime uma página indicando o início dos apêndices
+\partapendices
+
+	\setlength\beforechapskip{50pt}
+	\setlength\midchapskip{20pt}
+	\setlength\afterchapskip{20pt}
+
+\include{Apendices/A/APA}
+\include{Apendices/B/APB}
+\include{Apendices/C/APC}
+
+\end{apendicesenv}
+% ---
+
+
+% ----------------------------------------------------------
+% Anexos
+% ----------------------------------------------------------
+
+% ---
+% Inicia os anexos
+% ---
+\begin{anexosenv}
+
+% Imprime uma página indicando o início dos anexos
+\partanexos
+
+	\setlength\beforechapskip{50pt}
+	\setlength\midchapskip{20pt}
+	\setlength\afterchapskip{20pt}
+	
+\include{Anexos/A/ANA}
+\include{Anexos/B/ANB}
+\include{Anexos/C/ANC}
+
+\end{anexosenv}
+
+
+
+
+%---------------------------------------------------------------------
+% INDICE REMISSIVO
+%---------------------------------------------------------------------
+
+\phantompart
+
+\printindex
+
+
+
+\end{document}
